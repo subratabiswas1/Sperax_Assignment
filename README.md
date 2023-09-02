@@ -17,7 +17,6 @@ I am having the issue for a long time and had not sufficient time to complete th
 6. Smart Contracts
 
 **_How to use_**
-Make sure your ganache is running at port 7545 or change the port in truffle-config.js
 
 1. install node.js,npm and ganache
 2. create a new folder
