@@ -3,13 +3,13 @@ import './App.css'
 import { useState,useEffect } from 'react'
 import Web3 from 'web3'
 import detectEthereumProvider from '@metamask/detect-provider'
-import { loadContract } from './utils/load-contract'
+// import { loadContract } from './utils/load-contract'
 
 const App = () => {
   const [web3Api, setWeb3Api] = useState({
     provider: null,
     web3: null,
-    contract: null,
+    // contract: null,
   });
 
   const [balance,setBalance] = useState(null);
@@ -20,18 +20,18 @@ const App = () => {
   const setAccountListener = (provider) => {
     provider.on("accountsChanged", (accounts) => setAccount(accounts[0]));
   };
-  
+
   useEffect(()=>{
     const loadProvider = async() =>{
       const provider = await detectEthereumProvider();
-      const contract = await loadContract("Funder", provider);
+      // const contract = await loadContract("Funder", provider);
       if (provider) {
         setAccountListener(provider);
         provider.request({ method: "eth_requestAccounts" });
         setWeb3Api({
           web3: new Web3(provider),
           provider,
-          contract,
+          // contract,
         });
       } else {
         console.error("Please install MetaMask!", error);
@@ -41,31 +41,31 @@ const App = () => {
   },[]);
   // console.log(web3Api.web3);
 
-  useEffect(() => {
-    const loadBalance = async () => {
-      const { contract, web3 } = web3Api;
-      const balance = await web3.eth.getBalance(contract.address);
-      setBalance(web3.utils.fromWei(balance, "ether"));
-    };
-    web3Api.contract && loadBalance();
-  }, [web3Api]);
+  // useEffect(() => {
+  //   const loadBalance = async () => {
+  //     const { contract, web3 } = web3Api;
+  //     const balance = await web3.eth.getBalance(contract.address);
+  //     setBalance(web3.utils.fromWei(balance, "ether"));
+  //   };
+  //   web3Api.contract && loadBalance();
+  // }, [web3Api]);
 
   const transferFund = async () => {
-    const { web3, contract } = web3Api;
-    await contract.transfer({
-      from: account,
-      value: web3.utils.toWei("2", "ether"),
-    });
-    reloadEffect();
+    // const { web3, contract } = web3Api;
+    // await contract.transfer({
+    //   from: account,
+    //   value: web3.utils.toWei("2", "ether"),
+    // });
+    // reloadEffect();
   };
 
   const withdrawFund = async () => {
-    const { contract, web3 } = web3Api;
-    const withdrawAmout = web3.utils.toWei("2", "ether");
-    await contract.withdraw(withdrawAmout, {
-      from: account,
-    });
-    reloadEffect();
+    // const { contract, web3 } = web3Api;
+    // const withdrawAmout = web3.utils.toWei("2", "ether");
+    // await contract.withdraw(withdrawAmout, {
+    //   from: account,
+    // });
+    // reloadEffect();
   };
 
   useEffect(() => {
